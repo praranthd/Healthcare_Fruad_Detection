@@ -1,0 +1,12 @@
+pandas
+numpy
+PyYAML
+scikit-learn
+joblib
+pymongo
+mlflow
+fastapi
+uvicorn
+streamlit
+pydantic
+python-dotenv

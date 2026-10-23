@@ -1,0 +1,40 @@
+
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Private dataset - never upload to GitHub
+data/raw/*
+!data/raw/.gitkeep
+
+# Generated artifacts and trained models
+artifacts/*
+!artifacts/.gitkeep
+*.pkl
+*.joblib
+
+# MLflow local tracking data
+mlruns/
+
+# Logs
+*.log
+logs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE settings
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
