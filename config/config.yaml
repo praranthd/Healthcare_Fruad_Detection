@@ -1,0 +1,28 @@
+
+project:
+  name: healthcare-fraud-detection
+
+data_ingestion:
+  raw_data_path: data/raw/healthcare_fraud_detection.csv
+  artifact_dir: artifacts/data_ingestion
+
+data_validation:
+  schema_path: config/schema.yaml
+
+data_transformation:
+  artifact_dir: artifacts/data_transformation
+  test_size: 0.2
+  random_state: 42
+  target_column: Is_Fraud
+
+model_training:
+  artifact_dir: artifacts/model_training
+  model_name: random_forest
+
+model_evaluation:
+  artifact_dir: artifacts/model_evaluation
+  primary_metric: f1_score
+
+mlflow:
+  tracking_uri: mlruns
+  experiment_name: healthcare-fraud-detection

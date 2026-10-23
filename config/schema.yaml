@@ -1,0 +1,53 @@
+
+target_column: Is_Fraud
+
+numerical_columns:
+  - Patient_Age
+  - Procedure_Code
+  - Claim_Amount
+  - Approved_Amount
+  - Days_Between_Service_and_Claim
+  - Number_of_Claims_Per_Provider_Monthly
+  - Length_of_Stay
+  - Chronic_Condition_Flag
+  - Prior_Visits_12m
+
+categorical_columns:
+  - Provider_ID
+  - Claim_ID
+  - Patient_Gender
+  - Diagnosis_Code
+  - Insurance_Type
+  - Provider_Specialty
+  - Patient_State
+  - Claim_Status
+  - Visit_Type
+
+date_columns:
+  - Claim_Submission_Date
+
+required_columns:
+  - Provider_ID
+  - Claim_ID
+  - Patient_Age
+  - Patient_Gender
+  - Diagnosis_Code
+  - Procedure_Code
+  - Claim_Amount
+  - Approved_Amount
+  - Insurance_Type
+  - Claim_Submission_Date
+  - Days_Between_Service_and_Claim
+  - Number_of_Claims_Per_Provider_Monthly
+  - Provider_Specialty
+  - Patient_State
+  - Claim_Status
+  - Is_Fraud
+  - Length_of_Stay
+  - Visit_Type
+  - Chronic_Condition_Flag
+  - Prior_Visits_12m
+
+target_values:
+  - 0
+  - 1
