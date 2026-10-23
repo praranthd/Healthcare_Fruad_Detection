@@ -55,12 +55,9 @@ class TrainingPipeline:
 
             mlflow_config = self.config["mlflow"]
 
-            tracking_path = (
-                self.project_root / mlflow_config["tracking_uri"]
-            ).resolve()
+            mlflow.set_tracking_uri(mlflow_config["tracking_uri"])
 
-            # Keep MLflow tracking data local to this project.
-            mlflow.set_tracking_uri(tracking_path.as_uri())
+
 
             mlflow.set_experiment(
                 mlflow_config["experiment_name"]
@@ -160,7 +157,7 @@ class TrainingPipeline:
                 metrics = evaluation_artifact["metrics"]
 
                 for name, value in metrics.items():
-                    mlflow.log_metric(name, float(value))
+                        mlflow.log_metric(name, float(value))
 
                 # Log model and useful reports, not the dataset.
                 self._log_artifact_if_exists(model_path)
