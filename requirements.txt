@@ -10,4 +10,5 @@ uvicorn
 streamlit
 pydantic
 dvc
+pytest
 python-dotenv
