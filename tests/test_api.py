@@ -1,20 +1,36 @@
-﻿from fastapi.testclient import TestClient
+﻿import pytest
+from fastapi.testclient import TestClient
+
 from api.main import app
 
-client = TestClient(app)
+
+@pytest.fixture(scope="module")
+def client():
+    """
+    Create a test client that runs the FastAPI lifespan.
+    This allows the model and preprocessor to load before tests run.
+    """
+    with TestClient(app) as test_client:
+        yield test_client
 
 
-def test_home_endpoint():
+def test_home_endpoint(client):
+    """Test that the home endpoint responds successfully."""
     response = client.get("/")
+
     assert response.status_code == 200
 
 
-def test_health_endpoint():
+def test_health_endpoint(client):
+    """Test that the health endpoint responds successfully."""
     response = client.get("/health")
+
     assert response.status_code == 200
 
 
-def test_prediction_endpoint():
+def test_prediction_endpoint(client):
+    """Test that the prediction endpoint returns a valid prediction."""
+
     payload = {
         "Patient_Age": 45,
         "Patient_Gender": "Female",
@@ -35,18 +51,29 @@ def test_prediction_endpoint():
 
     response = client.post("/predict", json=payload)
 
+    # The API should successfully process the claim.
     assert response.status_code == 200, response.text
 
     result = response.json()
+
+    # Check that the expected response fields exist.
     assert "prediction" in result
     assert "fraud_probability" in result
+
+    # Prediction must be either 0 (not flagged) or 1 (flagged).
     assert result["prediction"] in [0, 1]
 
+    # Probability must be between 0 and 1 when provided.
     probability = result["fraud_probability"]
+
     if probability is not None:
+        assert isinstance(probability, (int, float))
         assert 0 <= probability <= 1
 
 
-def test_prediction_rejects_missing_fields():
+def test_prediction_rejects_missing_fields(client):
+    """Test that an empty request is rejected by input validation."""
+
     response = client.post("/predict", json={})
+
     assert response.status_code == 422

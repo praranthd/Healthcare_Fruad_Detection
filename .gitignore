@@ -38,3 +38,31 @@ logs/
 # Operating system files
 .DS_Store
 Thumbs.db
+
+
+# Private datasets
+data/raw/
+data/*.csv
+*.csv
+
+# Generated artifacts and models
+artifacts/*
+!artifacts/.gitkeep
+models/
+*.joblib
+*.pkl
+
+# Local MLflow database and runs
+mlflow.db
+mlflow.db-*
+mlruns/
+
+# Python environment and cache
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Secrets
+.env
